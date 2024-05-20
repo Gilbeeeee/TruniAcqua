@@ -1,0 +1,141 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+}
+
+h1 {
+    color: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.marquee-container {
+    width: 100%;
+    overflow: hidden;
+    background-color: lightgray;
+}
+
+.marquee {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    animation: scroll 30s linear infinite;
+}
+
+.marquee h3 {
+    margin: 15px;
+}
+
+.marquee p {
+    margin: 0px;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.text-box-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 25px;
+}
+
+.text-box {
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    opacity: 0.5; /* Oscura i pulsanti */
+    pointer-events: none; /* Disabilita i pulsanti */
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+button {
+    margin: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Stile per il popup */
+.password-popup {
+    display: block; /* Mostra il popup */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.password-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.password-content input {
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.password-content button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:disabled {
+    opacity: 0.5; /* Questo rende i bottoni disabilitati visivamente diversi */
+    cursor: not-allowed;
+}
+
+button {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.text-box {
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.text-box:disabled {
+    background-color: #e9ecef;
+}
