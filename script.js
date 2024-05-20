@@ -5,7 +5,7 @@ function checkPassword() {
 
     console.log(`Entered Password: ${enteredPassword}`); // Debugging
 
-    if (enteredPassword === correctPassword) {
+    if (enteredPassword === Mini) {
         console.log('Password corretta'); // Debugging
         enableElements();
         document.getElementById("password-popup").style.display = "none";
