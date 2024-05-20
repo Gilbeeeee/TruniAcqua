@@ -19,51 +19,18 @@
          };
 
         // Initialize Firebase
-                firebase.initializeApp(firebaseConfig);
+        firebase.initializeApp(firebaseConfig);
+    </script>
+    <script src="script.js"></script>
+</head>
+<body>
+    <div id="auth" style="display:none;">
+        <h2>Login</h2>
+        <input type="email" id="email" placeholder="Email"><br>
+        <input type="password" id="password" placeholder="Password"><br>
+        <button onclick="login()">Login</button>
+    </div>
 
-                // Authentication
-                firebase.auth().onAuthStateChanged((user) => {
-                    if (user) {
-                        loadData();
-                    } else {
-                        // User is signed out
-                        document.getElementById("auth").style.display = "block";
-                    }
-                });
-
-                function login() {
-                    const email = document.getElementById("email").value;
-                    const password = document.getElementById("password").value;
-                    firebase.auth().signInWithEmailAndPassword(email, password)
-                        .then((userCredential) => {
-                            // Signed in
-                            var user = userCredential.user;
-                            loadData();
-                        })
-                        .catch((error) => {
-                            var errorCode = error.code;
-                            var errorMessage = error.message;
-                            alert(errorMessage);
-                        });
-                }
-
-                function logout() {
-                    firebase.auth().signOut().then(() => {
-                        document.getElementById("auth").style.display = "block";
-                    }).catch((error) => {
-                        console.error(error);
-                    });
-                }
-            </script>
-        </head>
-        <body>
-            <div id="auth" style="display:none;">
-                <h2>Login</h2>
-                <input type="email" id="email" placeholder="Email"><br>
-                <input type="password" id="password" placeholder="Password"><br>
-                <button onclick="login()">Login</button>
-            </div>
-            
     <h1>A chi tocca prendere l'acqua oggi?</h1>
     <p>(Solo se sai la password corretta puoi modificare i dati)</p>
     
@@ -152,7 +119,5 @@
             <button onclick="checkPassword()">Invia</button>
         </div>
     </div>
-
-    <script src="script.js"></script>
 </body>
 </html>

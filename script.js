@@ -3,7 +3,10 @@ function checkPassword() {
     const correctPassword = "Mini"; // Sostituire con la password corretta
     const enteredPassword = document.getElementById("password").value;
 
+    console.log(`Entered Password: ${enteredPassword}`); // Debugging
+
     if (enteredPassword === correctPassword) {
+        console.log('Password corretta'); // Debugging
         enableElements();
         document.getElementById("password-popup").style.display = "none";
         document.getElementById('button-container').style.opacity = '1';
