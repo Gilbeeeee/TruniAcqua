@@ -1,5 +1,4 @@
-// Funzione per verificare la password
-function checkPassword() {
+/*function checkPassword() {
     console.log("Funzione checkPassword chiamata"); // Debugging
     const correctPassword = "Mini"; // Sostituire con la password corretta
     const enteredPasswordElement = document.getElementById("password");
@@ -8,7 +7,7 @@ function checkPassword() {
         console.error("Elemento con ID 'password' non trovato");
         return;
     }
-    
+
     const enteredPassword = enteredPasswordElement.value;
     console.log(`Correct Password: ${correctPassword}`); // Debugging
     console.log(`Entered Password: ${enteredPassword}`); // Debugging
@@ -32,6 +31,21 @@ function checkPassword() {
         alert("Password errata, riprova.");
     }
 }
+*/
+window.onload = loadData;
+
+// Aggiungi queste righe per abilitare i pulsanti e gli input senza password
+window.onload = () => {
+    document.getElementById('button-container').style.opacity = '1';
+    document.getElementById('button-container').style.pointerEvents = 'auto';
+    const buttons = document.querySelectorAll('.button-container button');
+    buttons.forEach(button => button.disabled = false);
+    const textboxes = document.querySelectorAll(".text-box");
+    const updateButtons = document.querySelectorAll(".text-box-container button");
+    textboxes.forEach(textbox => textbox.removeAttribute("disabled"));
+    updateButtons.forEach(button => button.removeAttribute("disabled"));
+    loadData();
+};
 
 // Funzione per abilitare tutti gli elementi
 function enableElements() {

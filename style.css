@@ -87,10 +87,10 @@ button {
     font-size: 16px;
     cursor: pointer;
 }
-
+/*
 /* Stile per il popup */
-.password-popup {
-    display: block; /* Mostra il popup */
+/*.password-popup {
+    display: block;*/ /* Mostra il popup *//*
     position: fixed;
     top: 50%;
     left: 50%;
@@ -100,7 +100,7 @@ button {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     z-index: 1000;
 }
-
+*/
 .password-content {
     display: flex;
     flex-direction: column;

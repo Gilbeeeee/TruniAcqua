@@ -21,7 +21,136 @@
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
     </script>
-    <script src="script.js"></script>
+    <script>
+        // Funzione per verificare la password
+        /*
+        function checkPassword() {
+            console.log("Funzione checkPassword chiamata");
+            const correctPassword = "Mini";
+            const enteredPasswordElement = document.getElementById("password");
+
+            if (!enteredPasswordElement) {
+                console.error("Elemento con ID 'password' non trovato");
+                return;
+            }
+
+            const enteredPassword = enteredPasswordElement.value;
+            console.log(`Correct Password: ${correctPassword}`);
+            console.log(`Entered Password: ${enteredPassword}`);
+
+            if (enteredPassword === "") {
+                console.log("Nessuna password inserita");
+                alert("Per favore, inserisci una password.");
+                return;
+            }
+
+            if (enteredPassword === correctPassword) {
+                console.log('Password corretta');
+                enableElements();
+                document.getElementById("password-popup").style.display = "none";
+                document.getElementById('button-container').style.opacity = '1';
+                document.getElementById('button-container').style.pointerEvents = 'auto';
+                const buttons = document.querySelectorAll('.button-container button');
+                buttons.forEach(button => button.disabled = false);
+            } else {
+                console.log("Password errata");
+                alert("Password errata, riprova.");
+            }
+        }
+        */
+
+        // Assicurati che gli elementi siano abilitati al caricamento della pagina
+        window.onload = () => {
+            document.getElementById('button-container').style.opacity = '1';
+            document.getElementById('button-container').style.pointerEvents = 'auto';
+            const buttons = document.querySelectorAll('.button-container button');
+            buttons.forEach(button => button.disabled = false);
+            const textboxes = document.querySelectorAll(".text-box");
+            const updateButtons = document.querySelectorAll(".text-box-container button");
+            textboxes.forEach(textbox => textbox.removeAttribute("disabled"));
+            updateButtons.forEach(button => button.removeAttribute("disabled"));
+            loadData();
+        };
+
+        // Funzioni per incrementare e decrementare i contatori
+        function increment(name, action) {
+            const element = document.getElementById(`${name}-${action}`);
+            element.textContent = parseInt(element.textContent) + 1;
+            saveData(); // Salva i dati ogni volta che vengono modificati
+        }
+
+        function decrement(name, action) {
+            const element = document.getElementById(`${name}-${action}`);
+            element.textContent = Math.max(parseInt(element.textContent) - 1, 0);
+            saveData(); // Salva i dati ogni volta che vengono modificati
+        }
+
+        // Funzione per aggiornare i nomi
+        function updateName(inputId) {
+            const inputElement = document.getElementById(inputId);
+            const newName = inputElement.value;
+            document.getElementById(`turns-text`).textContent = document.getElementById(`turns-text`).textContent.replace(new RegExp(inputElement.placeholder, 'g'), newName);
+            inputElement.placeholder = newName;
+            saveData(); // Salva i dati ogni volta che vengono modificati
+        }
+
+        // Funzione per salvare i dati nel database Firebase
+        function saveData() {
+            const db = firebase.database();
+            const data = {
+                gilberto: {
+                    water: document.getElementById('gilberto-water').textContent,
+                    cleaned: document.getElementById('gilberto-cleaned').textContent,
+                    brought: document.getElementById('gilberto-brought').textContent
+                },
+                adriano: {
+                    water: document.getElementById('adriano-water').textContent,
+                    cleaned: document.getElementById('adriano-cleaned').textContent,
+                    brought: document.getElementById('adriano-brought').textContent
+                },
+                gregorio: {
+                    water: document.getElementById('gregorio-water').textContent,
+                    cleaned: document.getElementById('gregorio-cleaned').textContent,
+                    brought: document.getElementById('gregorio-brought').textContent
+                },
+                names: {
+                    name1: document.getElementById('name1').placeholder,
+                    name2: document.getElementById('name2').placeholder,
+                    name3: document.getElementById('name3').placeholder
+                }
+            };
+            db.ref('data').set(data);
+        }
+
+        // Funzione per caricare i dati dal database Firebase
+        function loadData() {
+            const db = firebase.database();
+            db.ref('data').once('value').then((snapshot) => {
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    document.getElementById('gilberto-water').textContent = data.gilberto.water;
+                    document.getElementById('gilberto-cleaned').textContent = data.gilberto.cleaned;
+                    document.getElementById('gilberto-brought').textContent = data.gilberto.brought;
+
+                    document.getElementById('adriano-water').textContent = data.adriano.water;
+                    document.getElementById('adriano-cleaned').textContent = data.adriano.cleaned;
+                    document.getElementById('adriano-brought').textContent = data.adriano.brought;
+
+                    document.getElementById('gregorio-water').textContent = data.gregorio.water;
+                    document.getElementById('gregorio-cleaned').textContent = data.gregorio.cleaned;
+                    document.getElementById('gregorio-brought').textContent = data.gregorio.brought;
+
+                    document.getElementById('name1').placeholder = data.names.name1;
+                    document.getElementById('name2').placeholder = data.names.name2;
+                    document.getElementById('name3').placeholder = data.names.name3;
+                } else {
+                    console.log("No data available");
+                }
+            }).catch((error) => {
+                console.error(error);
+            });
+        }
+    </script>
 </head>
 <body>
     <div id="auth" style="display:none;">
@@ -112,6 +241,7 @@
         </div>
     </div>
 
+    <!-- Commenta questa parte
     <div id="password-popup" class="password-popup">
         <div class="password-content">
             <label for="password">Inserisci la password:</label>
@@ -119,5 +249,6 @@
             <button onclick="checkPassword()">Invia</button>
         </div>
     </div>
+    -->
 </body>
 </html>
