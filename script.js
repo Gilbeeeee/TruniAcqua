@@ -1,11 +1,25 @@
 // Funzione per verificare la password
 function checkPassword() {
+    console.log("Funzione checkPassword chiamata"); // Debugging
     const correctPassword = "Mini"; // Sostituire con la password corretta
-    const enteredPassword = document.getElementById("password").value;
+    const enteredPasswordElement = document.getElementById("password");
 
+    if (!enteredPasswordElement) {
+        console.error("Elemento con ID 'password' non trovato");
+        return;
+    }
+    
+    const enteredPassword = enteredPasswordElement.value;
+    console.log(`Correct Password: ${correctPassword}`); // Debugging
     console.log(`Entered Password: ${enteredPassword}`); // Debugging
 
-    if (enteredPassword === "Mini") {
+    if (enteredPassword === "") {
+        console.log("Nessuna password inserita");
+        alert("Per favore, inserisci una password.");
+        return;
+    }
+
+    if (enteredPassword === correctPassword) {
         console.log('Password corretta'); // Debugging
         enableElements();
         document.getElementById("password-popup").style.display = "none";
@@ -14,6 +28,7 @@ function checkPassword() {
         const buttons = document.querySelectorAll('.button-container button');
         buttons.forEach(button => button.disabled = false);
     } else {
+        console.log("Password errata"); // Debugging
         alert("Password errata, riprova.");
     }
 }
