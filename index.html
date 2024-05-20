@@ -3,15 +3,10 @@
 <head>
     <title>Turno per l'acqua</title>
     <link rel="stylesheet" type="text/css" href="style.css">
-     <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-     <!-- Add SDKs for Firebase products that you want to use -->
-     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
-     <script>
-         // Import the functions you need from the SDKs you need
-         import { initializeApp } from "firebase/app";
-         import { getDatabase, ref, set, get, child } from "firebase/database";
-
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+    <script>
          // Your web app's Firebase configuration
          const firebaseConfig = {
              apiKey: "AIzaSyA4JAkZlXs7WfjPzth7aMEyxFZaCJl8vEA",
@@ -23,12 +18,52 @@
              databaseURL: "https://acqualatini-default-rtdb.firebaseio.com/"
          };
 
-         // Initialize Firebase
-         const app = initializeApp(firebaseConfig);
-         const database = getDatabase(app);
-    </script>
-</head>
-<body>
+        // Initialize Firebase
+                firebase.initializeApp(firebaseConfig);
+
+                // Authentication
+                firebase.auth().onAuthStateChanged((user) => {
+                    if (user) {
+                        loadData();
+                    } else {
+                        // User is signed out
+                        document.getElementById("auth").style.display = "block";
+                    }
+                });
+
+                function login() {
+                    const email = document.getElementById("email").value;
+                    const password = document.getElementById("password").value;
+                    firebase.auth().signInWithEmailAndPassword(email, password)
+                        .then((userCredential) => {
+                            // Signed in
+                            var user = userCredential.user;
+                            loadData();
+                        })
+                        .catch((error) => {
+                            var errorCode = error.code;
+                            var errorMessage = error.message;
+                            alert(errorMessage);
+                        });
+                }
+
+                function logout() {
+                    firebase.auth().signOut().then(() => {
+                        document.getElementById("auth").style.display = "block";
+                    }).catch((error) => {
+                        console.error(error);
+                    });
+                }
+            </script>
+        </head>
+        <body>
+            <div id="auth" style="display:none;">
+                <h2>Login</h2>
+                <input type="email" id="email" placeholder="Email"><br>
+                <input type="password" id="password" placeholder="Password"><br>
+                <button onclick="login()">Login</button>
+            </div>
+            
     <h1>A chi tocca prendere l'acqua oggi?</h1>
     <p>(Solo se sai la password corretta puoi modificare i dati)</p>
     
