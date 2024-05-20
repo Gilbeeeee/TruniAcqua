@@ -1,6 +1,3 @@
-// Import the necessary functions from the Firebase SDK
-import { getDatabase, ref, set, get, child } from "firebase/database";
-
 // Funzione per verificare la password
 function checkPassword() {
     const correctPassword = "Mini"; // Sostituire con la password corretta
@@ -56,7 +53,7 @@ function updateName(inputId) {
 
 // Funzione per salvare i dati nel database Firebase
 function saveData() {
-    const db = getDatabase();
+    const db = firebase.database();
     const data = {
         gilberto: {
             water: document.getElementById('gilberto-water').textContent,
@@ -79,13 +76,13 @@ function saveData() {
             name3: document.getElementById('name3').placeholder
         }
     };
-    set(ref(db, 'data'), data);
+    db.ref('data').set(data);
 }
 
 // Funzione per caricare i dati dal database Firebase
 function loadData() {
-    const dbRef = ref(getDatabase());
-    get(child(dbRef, `data`)).then((snapshot) => {
+    const db = firebase.database();
+    db.ref('data').once('value').then((snapshot) => {
         if (snapshot.exists()) {
             const data = snapshot.val();
             document.getElementById('gilberto-water').textContent = data.gilberto.water;
